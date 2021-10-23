@@ -1,6 +1,7 @@
 package br.com.gs3.avaliacaotecnica.dao.entity;
 
 import br.com.gs3.avaliacaotecnica.enumerador.TipoTelefone;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
@@ -30,9 +31,10 @@ public class Telefone {
     private Long numero;
 
 
-    @JsonIgnore
+
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, optional = false)
     @JoinColumn(name = "cliente_id", nullable = false)
+    @JsonBackReference
     private Cliente cliente;
 
 

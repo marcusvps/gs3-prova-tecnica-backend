@@ -1,6 +1,7 @@
 package br.com.gs3.avaliacaotecnica.dao.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,9 +25,10 @@ public class Email {
     @javax.validation.constraints.Email(message = "Informe um e-mail válido")
     private String email;
 
-    @JsonIgnore
+
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, optional = false)
     @JoinColumn(name = "cliente_id", nullable = false)
+    @JsonBackReference
     private Cliente cliente;
 
 

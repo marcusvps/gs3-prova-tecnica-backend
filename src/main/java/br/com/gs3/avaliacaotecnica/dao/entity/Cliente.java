@@ -1,6 +1,7 @@
 package br.com.gs3.avaliacaotecnica.dao.entity;
 
 import br.com.gs3.avaliacaotecnica.annotation.Telefone;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -34,7 +35,7 @@ public class Cliente {
 
     @Valid
     @NotNull(message = "Endereço é obrigatório.")
-    @OneToOne
+    @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "endereco_id")
     private Endereco endereco;
 
@@ -42,7 +43,8 @@ public class Cliente {
     @NotNull(message = "Ao menos um email deve ser informado.")
     @Size(min = 1, message = "Ao menos um email deve ser informado.")
     @Size(min = 1, message = "Pelo menos um e-mail deve ser informado.")
-    @OneToMany(mappedBy = "cliente")
+    @OneToMany(mappedBy = "cliente" ,cascade = CascadeType.MERGE)
+    @JsonManagedReference
     private Set<Email> emails;
 
     @Telefone
@@ -50,7 +52,8 @@ public class Cliente {
     @NotNull(message = "Ao menos um telefone deve ser informado.")
     @Size(min = 1, message = "Ao menos um telefone deve ser informado.")
     @Size(min = 1, message = "Pelo menos um telefone deve ser informado.")
-    @OneToMany(mappedBy = "cliente")
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.MERGE)
+    @JsonManagedReference
     private Set<br.com.gs3.avaliacaotecnica.dao.entity.Telefone> telefones;
 
     @Override

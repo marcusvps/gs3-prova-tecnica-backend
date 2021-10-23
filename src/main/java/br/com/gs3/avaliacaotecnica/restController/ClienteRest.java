@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import javax.ws.rs.QueryParam;
 
 @RestController
 public class ClienteRest {
@@ -24,6 +23,11 @@ public class ClienteRest {
     @PostMapping("/salvar")
     public ResponseEntity<Cliente> salvar(@Valid @RequestBody Cliente novoCliente){
         return new ResponseEntity<>(clienteService.salvar(novoCliente), HttpStatus.OK);
-        
     }
+
+    @PutMapping("/alterar")
+    public ResponseEntity<Cliente> alterar(@Valid @RequestBody Cliente clienteASerAlterado){
+        return new ResponseEntity<>(clienteService.alterar(clienteASerAlterado), HttpStatus.OK);
+    }
+
 }
