@@ -1,5 +1,10 @@
 package br.com.gs3.avaliacaotecnica.enumerador;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@Getter
+@AllArgsConstructor
 public enum TipoPerfil {
     ADMIN(1,"Administrador"),
     COMUM(2, "Comum");
@@ -7,8 +12,5 @@ public enum TipoPerfil {
     private int id;
     private String descricao;
 
-    TipoPerfil(int id, String descricao) {
-        this.id = id;
-        this.descricao = descricao;
-    }
+
 }

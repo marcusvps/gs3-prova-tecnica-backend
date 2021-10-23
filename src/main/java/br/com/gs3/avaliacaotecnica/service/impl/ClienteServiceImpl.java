@@ -9,6 +9,7 @@ import br.com.gs3.avaliacaotecnica.service.TelefoneService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
 import java.util.List;
 
 @Service
@@ -33,7 +34,8 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Override
     public Cliente recuperarClientePor(String cpf) {
-        return clienteRepository.findByCpf(cpf);
+        Cliente cliente = clienteRepository.findByCpf(cpf);
+        return cliente;
     }
 
     @Override

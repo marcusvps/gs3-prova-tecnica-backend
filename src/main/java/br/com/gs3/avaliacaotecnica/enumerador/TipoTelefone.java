@@ -1,20 +1,18 @@
 package br.com.gs3.avaliacaotecnica.enumerador;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
+@AllArgsConstructor
 public enum TipoTelefone {
-    RESIDENCIAL(1,"Residencial","(xx) xxxx-xxxx"),
-    COMERCIAL(2,"Comercial","(xx) xxxx-xxxx"),
-    CELULAR(3,"Celular","(xx) xxxxx-xxxx");
+    RESIDENCIAL(1,10,"Residencial"),
+    COMERCIAL(2,10,"Comercial"),
+    CELULAR(3,11,"Telefone");
 
     private int id;
+    private int qtdCaracteres;
     private String descricao;
-    private String mascara;
 
-    TipoTelefone(int id, String descricao, String mascara) {
-        this.id = id;
-        this.descricao = descricao;
-        this.mascara = mascara;
-    }
+
 }

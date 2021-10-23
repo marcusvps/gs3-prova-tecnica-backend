@@ -1,5 +1,11 @@
 package br.com.gs3.avaliacaotecnica.enumerador;
 
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@Getter
+@AllArgsConstructor
 public enum TipoOperacao {
     INCLUSAO(1,"O usuário {user} realizou a inclusão de {tipo} em {data}."),
     REMOCAO(2,"O usuário {user} realizou a remoção de {tipo} em {data}."),
@@ -10,8 +16,4 @@ public enum TipoOperacao {
     private String mensagem;
 
 
-    TipoOperacao(int id, String mensagem) {
-        this.id = id;
-        this.mensagem = mensagem;
-    }
 }

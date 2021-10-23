@@ -1,8 +1,8 @@
 package br.com.gs3.avaliacaotecnica.dao.entity;
 
+import br.com.gs3.avaliacaotecnica.annotation.Telefone;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.*;
 import javax.validation.Valid;
@@ -45,12 +45,13 @@ public class Cliente {
     @OneToMany(mappedBy = "cliente")
     private Set<Email> emails;
 
+    @Telefone
     @Valid
     @NotNull(message = "Ao menos um telefone deve ser informado.")
     @Size(min = 1, message = "Ao menos um telefone deve ser informado.")
     @Size(min = 1, message = "Pelo menos um telefone deve ser informado.")
     @OneToMany(mappedBy = "cliente")
-    private Set<Telefone> telefones;
+    private Set<br.com.gs3.avaliacaotecnica.dao.entity.Telefone> telefones;
 
     @Override
     public boolean equals(Object o) {
