@@ -1,3 +1,3 @@
-INSERT INTO TAB_USUARIO(login,senha,tipo_perfil) VALUES ('admin','123456',1);
-INSERT INTO TAB_USUARIO(login,senha,tipo_perfil) VALUES ('comum','123456',2);
+INSERT INTO TAB_USUARIO(id,login,senha,tipo_perfil) VALUES (1,'admin','123456','ADMIN');
+INSERT INTO TAB_USUARIO(id,login,senha,tipo_perfil) VALUES (2,'comum','123456','COMUM');
 

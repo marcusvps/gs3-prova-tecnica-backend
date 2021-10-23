@@ -3,9 +3,9 @@ package br.com.gs3.avaliacaotecnica.dao.entity;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.lang.NonNull;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 @Entity
@@ -19,7 +19,8 @@ public class Email {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @NonNull
+    @NotNull(message = "O email é um campo obrigatório.")
+    @javax.validation.constraints.Email(message = "Informe um e-mail válido")
     private String email;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, optional = false)

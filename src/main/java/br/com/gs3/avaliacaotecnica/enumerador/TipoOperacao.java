@@ -1,4 +1,4 @@
-package br.com.gs3.avaliacaotecnica.dao.entity;
+package br.com.gs3.avaliacaotecnica.enumerador;
 
 public enum TipoOperacao {
     INCLUSAO(1,"O usuário {user} realizou a inclusão de {tipo} em {data}."),

@@ -1,5 +1,6 @@
 package br.com.gs3.avaliacaotecnica.dao.entity;
 
+import br.com.gs3.avaliacaotecnica.enumerador.TipoOperacao;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,8 +21,7 @@ public class HistoricoOperacoes {
     @Column
     private LocalDate dataOperacao;
 
-    @Enumerated
-    @Column
+    @Enumerated(EnumType.STRING)
     private TipoOperacao tipoOperacao;
 
     @ManyToOne

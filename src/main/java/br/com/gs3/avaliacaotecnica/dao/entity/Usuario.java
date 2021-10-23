@@ -1,5 +1,7 @@
 package br.com.gs3.avaliacaotecnica.dao.entity;
 
+import br.com.gs3.avaliacaotecnica.enumerador.TipoPerfil;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,17 +15,22 @@ import java.util.List;
 public class Usuario {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", nullable = false)
+    private Long id;
+
     @Column(name = "login", nullable = false)
     private String login;
 
-    @Column
+    @JsonIgnore
+    @Column(name = "senha", nullable = false)
     private String senha;
 
-    @OneToMany(mappedBy ="usuario")
+    @OneToMany(mappedBy ="usuario", fetch = FetchType.LAZY)
     private List<HistoricoOperacoes> historicoOperacoes;
 
-    @Enumerated
-    @Column
+    @Enumerated(EnumType.STRING)
     private TipoPerfil tipoPerfil;
+
 
 }

@@ -1,10 +1,12 @@
 package br.com.gs3.avaliacaotecnica.dao.entity;
 
+import br.com.gs3.avaliacaotecnica.enumerador.TipoTelefone;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.lang.NonNull;
+
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 @Entity
@@ -18,11 +20,11 @@ public class Telefone {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Enumerated
-    @Column
+    @Enumerated(EnumType.STRING)
+    @NotNull(message = "TIPO DE TELEFONE é um campo obrigatório.")
     private TipoTelefone tipoTelefone;
 
-    @NonNull
+    @NotNull(message = "NUMERO DE TELEFONE é um campo obrigatório.")
     @Column
     private Long numero;
 

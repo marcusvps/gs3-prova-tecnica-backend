@@ -1,4 +1,4 @@
-package br.com.gs3.avaliacaotecnica.dao.entity;
+package br.com.gs3.avaliacaotecnica.enumerador;
 
 import lombok.Getter;
 
