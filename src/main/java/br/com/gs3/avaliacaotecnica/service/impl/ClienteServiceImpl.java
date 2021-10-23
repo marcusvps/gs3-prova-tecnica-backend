@@ -2,15 +2,21 @@ package br.com.gs3.avaliacaotecnica.service.impl;
 
 import br.com.gs3.avaliacaotecnica.dao.entity.Cliente;
 import br.com.gs3.avaliacaotecnica.dao.repository.ClienteRepository;
+import br.com.gs3.avaliacaotecnica.exception.ClienteDuplicadoException;
+import br.com.gs3.avaliacaotecnica.exception.ClienteNotFoundException;
 import br.com.gs3.avaliacaotecnica.service.ClienteService;
 import br.com.gs3.avaliacaotecnica.service.EmailService;
 import br.com.gs3.avaliacaotecnica.service.EnderecoService;
 import br.com.gs3.avaliacaotecnica.service.TelefoneService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
-import java.text.ParseException;
 import java.util.List;
+
+import static br.com.gs3.avaliacaotecnica.enumerador.MensagensSistema.CLIENTE_DUPLICADO;
+import static br.com.gs3.avaliacaotecnica.enumerador.MensagensSistema.CLIENTE_JA_CADASTRADO;
 
 @Service
 public class ClienteServiceImpl implements ClienteService {
@@ -40,16 +46,24 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Override
     public Cliente salvar(Cliente novoCliente) {
-        enderecoService.salvar(novoCliente.getEndereco());
-        clienteRepository.save(novoCliente);
-        emailService.salvarVariosEmails(novoCliente);
-        telefoneService.salvarVariosTelefones(novoCliente);
-        return novoCliente;
+        try {
+            enderecoService.salvar(novoCliente.getEndereco());
+            clienteRepository.save(novoCliente);
+            emailService.salvarVariosEmails(novoCliente);
+            telefoneService.salvarVariosTelefones(novoCliente);
+            return novoCliente;
+        } catch (DataIntegrityViolationException e) {
+            throw new ClienteDuplicadoException(CLIENTE_JA_CADASTRADO.getDescricao().replace("{cpf}", novoCliente.getCpf()));
+        }
     }
 
     @Override
-    public void remover(Cliente clienteARemover) {
-        clienteRepository.delete(clienteARemover);
+    public void remover(Long idCliente) {
+        try {
+            clienteRepository.deleteById(idCliente);
+        } catch (EmptyResultDataAccessException e) {
+            throw new ClienteNotFoundException(CLIENTE_DUPLICADO.getDescricao().replace("{id}",idCliente.toString()));
+        }
     }
 
     @Override

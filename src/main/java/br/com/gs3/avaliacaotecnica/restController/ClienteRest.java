@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
+import static br.com.gs3.avaliacaotecnica.enumerador.MensagensSistema.CLIENTE_REMOVIDO;
+
 @RestController
 public class ClienteRest {
 
@@ -28,6 +30,12 @@ public class ClienteRest {
     @PutMapping("/alterar")
     public ResponseEntity<Cliente> alterar(@Valid @RequestBody Cliente clienteASerAlterado){
         return new ResponseEntity<>(clienteService.alterar(clienteASerAlterado), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/remover/{id}")
+    public ResponseEntity<String> remover(@PathVariable Long id){
+        clienteService.remover(id);
+        return new ResponseEntity<>(CLIENTE_REMOVIDO.getDescricao(), HttpStatus.OK);
     }
 
 }

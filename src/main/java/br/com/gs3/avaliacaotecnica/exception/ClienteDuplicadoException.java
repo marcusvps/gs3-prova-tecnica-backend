@@ -7,8 +7,6 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class ObrigatoriedadeException extends RuntimeException{
+public class ClienteDuplicadoException extends RuntimeException {
     private String message;
-
-
 }

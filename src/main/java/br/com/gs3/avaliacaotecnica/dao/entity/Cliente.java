@@ -35,7 +35,7 @@ public class Cliente {
 
     @Valid
     @NotNull(message = "Endereço é obrigatório.")
-    @OneToOne(cascade = CascadeType.MERGE)
+    @OneToOne(cascade = {CascadeType.MERGE,CascadeType.REMOVE})
     @JoinColumn(name = "endereco_id")
     private Endereco endereco;
 
@@ -43,7 +43,7 @@ public class Cliente {
     @NotNull(message = "Ao menos um email deve ser informado.")
     @Size(min = 1, message = "Ao menos um email deve ser informado.")
     @Size(min = 1, message = "Pelo menos um e-mail deve ser informado.")
-    @OneToMany(mappedBy = "cliente" ,cascade = CascadeType.MERGE)
+    @OneToMany(mappedBy = "cliente" ,cascade = {CascadeType.MERGE,CascadeType.REMOVE})
     @JsonManagedReference
     private Set<Email> emails;
 
@@ -52,7 +52,7 @@ public class Cliente {
     @NotNull(message = "Ao menos um telefone deve ser informado.")
     @Size(min = 1, message = "Ao menos um telefone deve ser informado.")
     @Size(min = 1, message = "Pelo menos um telefone deve ser informado.")
-    @OneToMany(mappedBy = "cliente", cascade = CascadeType.MERGE)
+    @OneToMany(mappedBy = "cliente", cascade = {CascadeType.MERGE,CascadeType.REMOVE})
     @JsonManagedReference
     private Set<br.com.gs3.avaliacaotecnica.dao.entity.Telefone> telefones;
 
