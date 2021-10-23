@@ -9,15 +9,23 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
+import java.util.List;
+
 import static br.com.gs3.avaliacaotecnica.enumerador.MensagensSistema.CLIENTE_REMOVIDO;
 
 @RestController
+@RequestMapping("api/cliente")
 public class ClienteRest {
 
     @Autowired
     private ClienteService clienteService;
 
-    @GetMapping("/cliente/{cpf}")
+    @GetMapping()
+    public ResponseEntity<List<Cliente>> recuperarTodosOsClientes(){
+        return new ResponseEntity<>(clienteService.findAllClientes(), HttpStatus.OK);
+    }
+
+    @GetMapping("/{cpf}")
     public ResponseEntity<Cliente> recuperarCliente(@PathVariable String cpf){
         return new ResponseEntity<>(clienteService.recuperarClientePor(cpf), HttpStatus.OK);
     }

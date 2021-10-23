@@ -28,7 +28,7 @@ public class Cliente {
     @Column(nullable = false,length = 100)
     private String nome;
 
-
+    @Size(min = 11, message = "O CPF do cliente deve ter 11 caracteres.")
     @NotNull(message = "CPF é um campo obrigatório.")
     @Column(nullable = false,unique = true)
     private String cpf;
@@ -41,7 +41,6 @@ public class Cliente {
 
     @Valid
     @NotNull(message = "Ao menos um email deve ser informado.")
-    @Size(min = 1, message = "Ao menos um email deve ser informado.")
     @Size(min = 1, message = "Pelo menos um e-mail deve ser informado.")
     @OneToMany(mappedBy = "cliente" ,cascade = {CascadeType.MERGE,CascadeType.REMOVE})
     @JsonManagedReference

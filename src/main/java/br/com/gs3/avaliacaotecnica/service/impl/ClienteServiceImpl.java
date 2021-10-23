@@ -2,6 +2,7 @@ package br.com.gs3.avaliacaotecnica.service.impl;
 
 import br.com.gs3.avaliacaotecnica.dao.entity.Cliente;
 import br.com.gs3.avaliacaotecnica.dao.repository.ClienteRepository;
+import br.com.gs3.avaliacaotecnica.enumerador.MensagensSistema;
 import br.com.gs3.avaliacaotecnica.exception.ClienteDuplicadoException;
 import br.com.gs3.avaliacaotecnica.exception.ClienteNotFoundException;
 import br.com.gs3.avaliacaotecnica.service.ClienteService;
@@ -14,8 +15,9 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
-import static br.com.gs3.avaliacaotecnica.enumerador.MensagensSistema.CLIENTE_DUPLICADO;
+import static br.com.gs3.avaliacaotecnica.enumerador.MensagensSistema.CLIENTE_NAO_ENCONTRADO_POR_ID;
 import static br.com.gs3.avaliacaotecnica.enumerador.MensagensSistema.CLIENTE_JA_CADASTRADO;
 
 @Service
@@ -40,8 +42,12 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Override
     public Cliente recuperarClientePor(String cpf) {
-        Cliente cliente = clienteRepository.findByCpf(cpf);
-        return cliente;
+        return Optional.ofNullable(clienteRepository.findByCpf(cpf))
+                .orElseThrow(() -> new ClienteNotFoundException(MensagensSistema
+                        .CLIENTE_NAO_ENCONTRADO_POR_CPF
+                        .getDescricao()
+                        .replace("{cpf}",cpf)));
+
     }
 
     @Override
@@ -62,7 +68,7 @@ public class ClienteServiceImpl implements ClienteService {
         try {
             clienteRepository.deleteById(idCliente);
         } catch (EmptyResultDataAccessException e) {
-            throw new ClienteNotFoundException(CLIENTE_DUPLICADO.getDescricao().replace("{id}",idCliente.toString()));
+            throw new ClienteNotFoundException(CLIENTE_NAO_ENCONTRADO_POR_ID.getDescricao().replace("{id}",idCliente.toString()));
         }
     }
 
