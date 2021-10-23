@@ -9,6 +9,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Objects;
 
 @Entity
@@ -26,9 +27,10 @@ public class Telefone {
     @NotNull(message = "TIPO DE TELEFONE é um campo obrigatório.")
     private TipoTelefone tipoTelefone;
 
+    @Size(min = 10, message = "NUMERO DE TELEFONE deve ter no minimo 10 caracteres")
     @NotNull(message = "NUMERO DE TELEFONE é um campo obrigatório.")
     @Column
-    private Long numero;
+    private String numero;
 
 
 
