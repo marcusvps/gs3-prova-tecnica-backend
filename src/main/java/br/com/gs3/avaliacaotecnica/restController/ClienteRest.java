@@ -5,9 +5,10 @@ import br.com.gs3.avaliacaotecnica.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import javax.ws.rs.QueryParam;
 
 @RestController
 public class ClienteRest {
@@ -18,5 +19,11 @@ public class ClienteRest {
     @GetMapping("/cliente/{cpf}")
     public ResponseEntity<Cliente> recuperarCliente(@PathVariable String cpf){
         return new ResponseEntity<>(clienteService.recuperarClientePor(cpf), HttpStatus.OK);
+    }
+
+    @PostMapping("/salvar")
+    public ResponseEntity<Cliente> salvar(@Valid @RequestBody Cliente novoCliente){
+        return new ResponseEntity<>(clienteService.salvar(novoCliente), HttpStatus.OK);
+        
     }
 }

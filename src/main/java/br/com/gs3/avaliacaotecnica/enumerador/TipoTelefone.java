@@ -5,8 +5,8 @@ import lombok.Getter;
 @Getter
 public enum TipoTelefone {
     RESIDENCIAL(1,"Residencial","(xx) xxxx-xxxx"),
-    COMERCIAL(1,"Comercial","(xx) xxxx-xxxx"),
-    CELULAR(1,"Celular","(xx) xxxxx-xxxx");
+    COMERCIAL(2,"Comercial","(xx) xxxx-xxxx"),
+    CELULAR(3,"Celular","(xx) xxxxx-xxxx");
 
     private int id;
     private String descricao;

@@ -5,12 +5,11 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class AutenticacaoInvalidaException extends RuntimeException {
+public class ObrigatoriedadeException extends RuntimeException{
     private int errorCode;
     private String errorMessage;
 
-
-    public AutenticacaoInvalidaException(String message) {
+    public ObrigatoriedadeException(String message) {
         super();
         this.errorMessage = message;
     }

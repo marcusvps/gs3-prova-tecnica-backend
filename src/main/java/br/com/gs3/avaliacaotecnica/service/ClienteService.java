@@ -1,17 +1,14 @@
 package br.com.gs3.avaliacaotecnica.service;
 
 import br.com.gs3.avaliacaotecnica.dao.entity.Cliente;
-import br.com.gs3.avaliacaotecnica.dao.repository.ClienteRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-@Service
-public class ClienteService {
+import java.util.List;
 
-    @Autowired
-    private ClienteRepository clienteRepository;
+public interface ClienteService{
 
-    public Cliente recuperarClientePor(String cpf){
-        return clienteRepository.findByCpf(cpf);
-    }
+    List<Cliente> findAllClientes();
+    Cliente recuperarClientePor(String cpf);
+    Cliente salvar(Cliente novoCliente);
+    void remover(Cliente clienteARemover);
+    Cliente alterar(Cliente clienteASerAlterado);
 }
