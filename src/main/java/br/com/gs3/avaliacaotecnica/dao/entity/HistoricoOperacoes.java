@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name="TAB_HISTORICO_OPERACOES")
@@ -19,7 +20,10 @@ public class HistoricoOperacoes {
     private Long id;
 
     @Column
-    private LocalDate dataOperacao;
+    private LocalDateTime dataOperacao;
+
+    @Column
+    private String descricao;
 
     @Enumerated(EnumType.STRING)
     private TipoOperacao tipoOperacao;

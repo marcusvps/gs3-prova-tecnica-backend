@@ -1,6 +1,8 @@
 package br.com.gs3.avaliacaotecnica.restController;
 
+import br.com.gs3.avaliacaotecnica.annotation.HistoricoOperacoesRegister;
 import br.com.gs3.avaliacaotecnica.dao.entity.Endereco;
+import br.com.gs3.avaliacaotecnica.enumerador.TipoOperacao;
 import br.com.gs3.avaliacaotecnica.service.EnderecoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,7 +19,7 @@ public class EnderecoRest {
     @Autowired
     private EnderecoService enderecoService;
 
-
+    @HistoricoOperacoesRegister(tipoOperacao = TipoOperacao.BUSCA_CEP)
     @GetMapping("/{cep}")
     public ResponseEntity<Endereco> buscarCep(@PathVariable String cep){
         return new ResponseEntity<>(enderecoService.buscarDadosDeCEP(cep), HttpStatus.OK);

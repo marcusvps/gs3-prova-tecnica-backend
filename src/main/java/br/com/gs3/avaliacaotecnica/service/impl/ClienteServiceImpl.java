@@ -6,9 +6,7 @@ import br.com.gs3.avaliacaotecnica.enumerador.MensagensSistema;
 import br.com.gs3.avaliacaotecnica.exception.ClienteDuplicadoException;
 import br.com.gs3.avaliacaotecnica.exception.ClienteNotFoundException;
 import br.com.gs3.avaliacaotecnica.service.ClienteService;
-import br.com.gs3.avaliacaotecnica.service.EmailService;
-import br.com.gs3.avaliacaotecnica.service.EnderecoService;
-import br.com.gs3.avaliacaotecnica.service.TelefoneService;
+import br.com.gs3.avaliacaotecnica.service.HistoricoOperacoesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -17,8 +15,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-import static br.com.gs3.avaliacaotecnica.enumerador.MensagensSistema.CLIENTE_NAO_ENCONTRADO_POR_ID;
 import static br.com.gs3.avaliacaotecnica.enumerador.MensagensSistema.CLIENTE_JA_CADASTRADO;
+import static br.com.gs3.avaliacaotecnica.enumerador.MensagensSistema.CLIENTE_NAO_ENCONTRADO_POR_ID;
 
 @Service
 public class ClienteServiceImpl implements ClienteService {
@@ -26,14 +24,7 @@ public class ClienteServiceImpl implements ClienteService {
     @Autowired
     private ClienteRepository clienteRepository;
 
-    @Autowired
-    private EnderecoService enderecoService;
 
-    @Autowired
-    private TelefoneService telefoneService;
-
-    @Autowired
-    private EmailService emailService;
 
     @Override
     public List<Cliente> findAllClientes() {

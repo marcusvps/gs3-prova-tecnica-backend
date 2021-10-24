@@ -23,4 +23,9 @@ public class UsuarioServiceImpl implements UsuarioService {
                 .ofNullable(repository.findByLoginAndSenha(login.toLowerCase(), senha))
                 .orElseThrow(() -> new AutenticacaoInvalidaException(ERRO_AUTENTICACAO_USUARIO.getDescricao()));
     }
+
+    @Override
+    public Usuario recuperarUsuarioPor(Long id) {
+        return repository.findById(id).get();
+    }
 }

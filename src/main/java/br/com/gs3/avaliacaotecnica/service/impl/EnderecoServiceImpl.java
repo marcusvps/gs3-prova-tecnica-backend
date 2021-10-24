@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.ResourceAccessException;
-import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 @Service
@@ -45,18 +44,4 @@ public class EnderecoServiceImpl implements EnderecoService {
         return entidade;
     }
 
-    @Override
-    public Endereco salvar(Endereco novoEndereco) {
-        return enderecoRepository.save(novoEndereco);
-    }
-
-    @Override
-    public void remover(Endereco enderecoARemover) {
-
-    }
-
-    @Override
-    public Endereco alterar(Endereco enderecoASerAlterado) {
-        return null;
-    }
 }

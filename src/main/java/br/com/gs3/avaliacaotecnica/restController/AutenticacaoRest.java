@@ -2,7 +2,6 @@ package br.com.gs3.avaliacaotecnica.restController;
 
 import br.com.gs3.avaliacaotecnica.dao.entity.Usuario;
 import br.com.gs3.avaliacaotecnica.service.UsuarioService;
-import br.com.gs3.avaliacaotecnica.service.impl.UsuarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
