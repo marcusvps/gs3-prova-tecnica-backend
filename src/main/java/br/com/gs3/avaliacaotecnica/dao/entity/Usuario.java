@@ -2,6 +2,7 @@ package br.com.gs3.avaliacaotecnica.dao.entity;
 
 import br.com.gs3.avaliacaotecnica.enumerador.TipoPerfil;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -26,6 +27,7 @@ public class Usuario {
     @Column(name = "senha", nullable = false)
     private String senha;
 
+    @JsonManagedReference
     @OneToMany(mappedBy ="usuario", fetch = FetchType.LAZY)
     private List<HistoricoOperacoes> historicoOperacoes;
 

@@ -1,6 +1,7 @@
 package br.com.gs3.avaliacaotecnica.dao.entity;
 
 import br.com.gs3.avaliacaotecnica.enumerador.TipoOperacao;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -28,6 +29,7 @@ public class HistoricoOperacoes {
     @Enumerated(EnumType.STRING)
     private TipoOperacao tipoOperacao;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "usuario_login")
     private Usuario usuario;

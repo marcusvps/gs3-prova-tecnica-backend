@@ -1,8 +1,10 @@
 package br.com.gs3.avaliacaotecnica.interceptor;
 
 import br.com.gs3.avaliacaotecnica.annotation.HistoricoOperacoesRegister;
+import br.com.gs3.avaliacaotecnica.dao.entity.Usuario;
 import br.com.gs3.avaliacaotecnica.enumerador.TipoOperacao;
 import br.com.gs3.avaliacaotecnica.service.HistoricoOperacoesService;
+import br.com.gs3.avaliacaotecnica.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
@@ -14,6 +16,8 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Objects;
+import java.util.Optional;
 
 @Component
 public class ClienteInterceptor extends HandlerInterceptorAdapter {
@@ -22,14 +26,27 @@ public class ClienteInterceptor extends HandlerInterceptorAdapter {
     @Autowired
     private HistoricoOperacoesService historicoOperacoesService;
 
+    @Autowired
+    private UsuarioService usuarioService;
+
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         HandlerMethod handlerMethod = (HandlerMethod) handler;
         HistoricoOperacoesRegister annotationHistorico = handlerMethod.getMethod().getAnnotation(HistoricoOperacoesRegister.class);
         if(null != annotationHistorico){
-            Long idUsuarioLogado = Long.valueOf(request.getHeader("idUsuarioLogado"));
+            Long idUsuarioLogado = Long.valueOf(Optional.ofNullable(request.getHeader("idUsuarioLogado")).orElse("0"));
+
+            if(Objects.equals(0L, idUsuarioLogado)){
+                String login = request.getParameter("login");
+                String senha = request.getParameter("senha");
+                Usuario usuario = usuarioService.recuperarUsuarioPor(login, senha);
+                if(null != usuario){
+                    idUsuarioLogado = usuario.getId();
+                }
+            }
             historicoOperacoesService.salvar(historicoOperacoesService.criarHistorico(idUsuarioLogado, annotationHistorico.tipoOperacao()));
+
         }
         return true;
     }

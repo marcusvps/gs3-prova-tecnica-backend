@@ -11,7 +11,8 @@ public enum TipoOperacao {
     REMOCAO(2,"O usuário {user} realizou a ação de {tipo} em {data}."),
     ALTERACAO(3, "O usuário {user} realizou a ação de {tipo} em {data}."),
     VISUALIZACAO(4, "O usuário {user} realizou a ação de {tipo} em {data}."),
-    BUSCA_CEP(5, "O usuário {user} buscou os dados do CEP em {data} na API externa.")
+    BUSCA_CEP(5, "O usuário {user} buscou os dados do CEP em {data} na API externa."),
+    LOGIN(6,"O usuário {user} acessou o sistema em {data}.")
 
     ;
 
