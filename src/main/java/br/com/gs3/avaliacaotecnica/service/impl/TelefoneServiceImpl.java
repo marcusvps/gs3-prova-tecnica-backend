@@ -23,7 +23,6 @@ public class TelefoneServiceImpl implements TelefoneService {
 
     @Override
     public List<Telefone> salvarVariosTelefones(Cliente novoCliente) {
-        novoCliente.getTelefones().forEach(telefone -> telefone.setCliente(novoCliente));
         return telefoneRepository.saveAll(novoCliente.getTelefones());
     }
 

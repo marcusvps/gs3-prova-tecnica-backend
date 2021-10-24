@@ -53,10 +53,7 @@ public class ClienteServiceImpl implements ClienteService {
     @Override
     public Cliente salvar(Cliente novoCliente) {
         try {
-            enderecoService.salvar(novoCliente.getEndereco());
             clienteRepository.save(novoCliente);
-            emailService.salvarVariosEmails(novoCliente);
-            telefoneService.salvarVariosTelefones(novoCliente);
             return novoCliente;
         } catch (DataIntegrityViolationException e) {
             throw new ClienteDuplicadoException(CLIENTE_JA_CADASTRADO.getDescricao().replace("{cpf}", novoCliente.getCpf()));

@@ -22,7 +22,6 @@ public class EmailServiceImpl implements EmailService {
 
     @Override
     public List<Email> salvarVariosEmails(Cliente novoCliente) {
-        novoCliente.getEmails().forEach(email -> email.setCliente(novoCliente));
         return emailRepository.saveAll(novoCliente.getEmails());
     }
 
