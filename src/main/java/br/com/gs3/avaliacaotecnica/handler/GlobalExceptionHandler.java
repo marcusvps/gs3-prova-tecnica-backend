@@ -2,10 +2,7 @@ package br.com.gs3.avaliacaotecnica.handler;
 
 
 import br.com.gs3.avaliacaotecnica.dto.RetornoExceptionDTO;
-import br.com.gs3.avaliacaotecnica.exception.AutenticacaoInvalidaException;
-import br.com.gs3.avaliacaotecnica.exception.ClienteDuplicadoException;
-import br.com.gs3.avaliacaotecnica.exception.ClienteNotFoundException;
-import br.com.gs3.avaliacaotecnica.exception.ObrigatoriedadeException;
+import br.com.gs3.avaliacaotecnica.exception.*;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,6 +35,11 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = ClienteNotFoundException.class)
     public ResponseEntity<RetornoExceptionDTO> clientNotFound(ClienteNotFoundException e) {
         return new ResponseEntity<>(new RetornoExceptionDTO(e.getMessage(),HttpStatus.NOT_FOUND.value()),HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(value = IntegracaoExternaException.class)
+    public ResponseEntity<RetornoExceptionDTO> integracaoExternaErro(IntegracaoExternaException e) {
+        return new ResponseEntity<>(new RetornoExceptionDTO(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR.value()),HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
