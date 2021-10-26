@@ -2,17 +2,13 @@ package br.com.gs3.avaliacaotecnica.interceptor;
 
 import br.com.gs3.avaliacaotecnica.annotation.HistoricoOperacoesRegister;
 import br.com.gs3.avaliacaotecnica.dao.entity.Usuario;
-import br.com.gs3.avaliacaotecnica.enumerador.TipoOperacao;
 import br.com.gs3.avaliacaotecnica.service.HistoricoOperacoesService;
 import br.com.gs3.avaliacaotecnica.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -39,7 +35,7 @@ public class ClienteInterceptor implements HandlerInterceptor {
             HandlerMethod handlerMethod = (HandlerMethod) handler;
             HistoricoOperacoesRegister annotationHistorico = handlerMethod.getMethod().getAnnotation(HistoricoOperacoesRegister.class);
             if(null != annotationHistorico){
-                Long idUsuarioLogado = Long.valueOf(Optional.ofNullable(request.getParameter("idUsuarioLogado")).orElse("0"));
+                Long idUsuarioLogado = Long.valueOf(Optional.ofNullable(request.getHeader("Authorization")).orElse("0"));
 
                 if(Objects.equals(0L, idUsuarioLogado)){
                     String login = request.getParameter("login");

@@ -36,7 +36,6 @@ public class ClienteRest {
         return new ResponseEntity<>(clienteService.recuperarClientePor(cpf), HttpStatus.OK);
     }
 
-    @CrossOrigin
     @HistoricoOperacoesRegister(tipoOperacao = TipoOperacao.INCLUSAO)
     @PostMapping("/salvar")
     public ResponseEntity<Cliente> salvar(@Valid @RequestBody Cliente novoCliente){
