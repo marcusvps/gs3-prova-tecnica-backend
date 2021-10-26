@@ -11,6 +11,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class EnderecoIntegracaoDTO {
 
+
     private String logradouro;
     private String localidade;
     private String bairro;

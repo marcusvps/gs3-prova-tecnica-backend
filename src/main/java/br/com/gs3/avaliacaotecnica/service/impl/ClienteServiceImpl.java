@@ -62,6 +62,7 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Override
     public Cliente alterar(Cliente clienteASerAlterado) {
+        if(!clienteRepository.existsById(clienteASerAlterado.getId())) throw new ClienteNotFoundException(CLIENTE_NAO_ENCONTRADO_POR_ID.getDescricao().replace("{id}",clienteASerAlterado.getId().toString()));
         return clienteRepository.save(clienteASerAlterado);
     }
 }
