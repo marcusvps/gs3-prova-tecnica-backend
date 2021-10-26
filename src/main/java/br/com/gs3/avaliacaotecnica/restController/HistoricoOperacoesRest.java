@@ -2,7 +2,6 @@ package br.com.gs3.avaliacaotecnica.restController;
 
 
 import br.com.gs3.avaliacaotecnica.annotation.HistoricoOperacoesRegister;
-import br.com.gs3.avaliacaotecnica.dao.entity.Cliente;
 import br.com.gs3.avaliacaotecnica.dao.entity.HistoricoOperacoes;
 import br.com.gs3.avaliacaotecnica.service.HistoricoOperacoesService;
 import org.springframework.beans.factory.annotation.Autowired;

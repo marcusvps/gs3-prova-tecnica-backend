@@ -43,8 +43,8 @@ public class HistoricoOperacoesImpl implements HistoricoOperacoesService {
     }
 
     @Override
-    public HistoricoOperacoes salvar(HistoricoOperacoes historicoOperacao) {
-       return historicoOperacoesRepository.save(historicoOperacao);
+    public void salvar(HistoricoOperacoes historicoOperacao) {
+        historicoOperacoesRepository.save(historicoOperacao);
     }
 
     @Override

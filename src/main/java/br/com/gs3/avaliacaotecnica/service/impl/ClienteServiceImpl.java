@@ -6,7 +6,6 @@ import br.com.gs3.avaliacaotecnica.enumerador.MensagensSistema;
 import br.com.gs3.avaliacaotecnica.exception.ClienteDuplicadoException;
 import br.com.gs3.avaliacaotecnica.exception.ClienteNotFoundException;
 import br.com.gs3.avaliacaotecnica.service.ClienteService;
-import br.com.gs3.avaliacaotecnica.service.HistoricoOperacoesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -62,7 +61,12 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Override
     public Cliente alterar(Cliente clienteASerAlterado) {
-        if(!clienteRepository.existsById(clienteASerAlterado.getId())) throw new ClienteNotFoundException(CLIENTE_NAO_ENCONTRADO_POR_ID.getDescricao().replace("{id}",clienteASerAlterado.getId().toString()));
-        return clienteRepository.save(clienteASerAlterado);
+        try{
+            if(!clienteRepository.existsById(clienteASerAlterado.getId())) throw new ClienteNotFoundException(CLIENTE_NAO_ENCONTRADO_POR_ID.getDescricao().replace("{id}",clienteASerAlterado.getId().toString()));
+            return clienteRepository.save(clienteASerAlterado);
+        } catch (DataIntegrityViolationException e) {
+        throw new ClienteDuplicadoException(CLIENTE_JA_CADASTRADO.getDescricao().replace("{cpf}", clienteASerAlterado.getCpf()));
+    }
+
     }
 }

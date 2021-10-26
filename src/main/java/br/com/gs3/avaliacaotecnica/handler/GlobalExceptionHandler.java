@@ -51,9 +51,6 @@ public class GlobalExceptionHandler {
                 .stream()
                 .map(DefaultMessageSourceResolvable::getDefaultMessage)
                 .collect(Collectors.toList());
-        GsonBuilder builder = new GsonBuilder();
-        builder.setPrettyPrinting();
-        Gson gson = builder.create();
         return new ResponseEntity<>(new RetornoExceptionDTO(erros,HttpStatus.BAD_REQUEST.value()),HttpStatus.BAD_REQUEST);
     }
 
