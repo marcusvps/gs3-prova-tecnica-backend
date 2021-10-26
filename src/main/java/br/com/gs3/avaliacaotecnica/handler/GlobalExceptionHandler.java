@@ -3,6 +3,8 @@ package br.com.gs3.avaliacaotecnica.handler;
 
 import br.com.gs3.avaliacaotecnica.dto.RetornoExceptionDTO;
 import br.com.gs3.avaliacaotecnica.exception.*;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -49,7 +51,9 @@ public class GlobalExceptionHandler {
                 .stream()
                 .map(DefaultMessageSourceResolvable::getDefaultMessage)
                 .collect(Collectors.toList());
-
+        GsonBuilder builder = new GsonBuilder();
+        builder.setPrettyPrinting();
+        Gson gson = builder.create();
         return new ResponseEntity<>(new RetornoExceptionDTO(erros,HttpStatus.BAD_REQUEST.value()),HttpStatus.BAD_REQUEST);
     }
 

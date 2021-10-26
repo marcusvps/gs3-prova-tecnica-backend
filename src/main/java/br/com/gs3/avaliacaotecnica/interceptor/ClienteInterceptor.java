@@ -20,7 +20,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Component
-public class ClienteInterceptor extends HandlerInterceptorAdapter {
+public class ClienteInterceptor implements HandlerInterceptor {
 
 
     @Autowired
@@ -32,21 +32,28 @@ public class ClienteInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        HandlerMethod handlerMethod = (HandlerMethod) handler;
-        HistoricoOperacoesRegister annotationHistorico = handlerMethod.getMethod().getAnnotation(HistoricoOperacoesRegister.class);
-        if(null != annotationHistorico){
-            Long idUsuarioLogado = Long.valueOf(Optional.ofNullable(request.getHeader("idUsuarioLogado")).orElse("0"));
-
-            if(Objects.equals(0L, idUsuarioLogado)){
-                String login = request.getParameter("login");
-                String senha = request.getParameter("senha");
-                Usuario usuario = usuarioService.recuperarUsuarioPor(login, senha);
-                if(null != usuario){
-                    idUsuarioLogado = usuario.getId();
-                }
+        try {
+            if (!(handler instanceof HandlerMethod)) {
+                return false;
             }
-            historicoOperacoesService.salvar(historicoOperacoesService.criarHistorico(idUsuarioLogado, annotationHistorico.tipoOperacao()));
+            HandlerMethod handlerMethod = (HandlerMethod) handler;
+            HistoricoOperacoesRegister annotationHistorico = handlerMethod.getMethod().getAnnotation(HistoricoOperacoesRegister.class);
+            if(null != annotationHistorico){
+                Long idUsuarioLogado = Long.valueOf(Optional.ofNullable(request.getParameter("idUsuarioLogado")).orElse("0"));
 
+                if(Objects.equals(0L, idUsuarioLogado)){
+                    String login = request.getParameter("login");
+                    String senha = request.getParameter("senha");
+                    Usuario usuario = usuarioService.recuperarUsuarioPor(login, senha);
+                    if(null != usuario){
+                        idUsuarioLogado = usuario.getId();
+                    }
+                }
+                historicoOperacoesService.salvar(historicoOperacoesService.criarHistorico(idUsuarioLogado, annotationHistorico.tipoOperacao()));
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return true;
     }

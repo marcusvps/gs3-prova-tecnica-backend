@@ -2,17 +2,16 @@ package br.com.gs3.avaliacaotecnica.restController;
 
 import br.com.gs3.avaliacaotecnica.annotation.HistoricoOperacoesRegister;
 import br.com.gs3.avaliacaotecnica.dao.entity.Cliente;
-import br.com.gs3.avaliacaotecnica.dao.entity.Usuario;
 import br.com.gs3.avaliacaotecnica.enumerador.TipoOperacao;
 import br.com.gs3.avaliacaotecnica.service.ClienteService;
-import br.com.gs3.avaliacaotecnica.service.HistoricoOperacoesService;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-
 import java.util.List;
 
 import static br.com.gs3.avaliacaotecnica.enumerador.MensagensSistema.CLIENTE_REMOVIDO;
@@ -37,6 +36,7 @@ public class ClienteRest {
         return new ResponseEntity<>(clienteService.recuperarClientePor(cpf), HttpStatus.OK);
     }
 
+    @CrossOrigin
     @HistoricoOperacoesRegister(tipoOperacao = TipoOperacao.INCLUSAO)
     @PostMapping("/salvar")
     public ResponseEntity<Cliente> salvar(@Valid @RequestBody Cliente novoCliente){
@@ -53,7 +53,11 @@ public class ClienteRest {
     @DeleteMapping("/remover/{id}")
     public ResponseEntity<String> remover(@PathVariable Long id){
         clienteService.remover(id);
-        return new ResponseEntity<>(CLIENTE_REMOVIDO.getDescricao(), HttpStatus.OK);
+        String descricao = CLIENTE_REMOVIDO.getDescricao();
+        GsonBuilder builder = new GsonBuilder();
+        builder.setPrettyPrinting();
+        Gson gson = builder.create();
+        return new ResponseEntity<>(gson.toJson(descricao), HttpStatus.OK);
     }
 
 }

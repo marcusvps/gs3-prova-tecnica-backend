@@ -17,10 +17,13 @@ public class TelefoneValidator implements ConstraintValidator<Telefone, Set<br.c
     @Override
     public boolean isValid(Set<br.com.gs3.avaliacaotecnica.dao.entity.Telefone> telefones, ConstraintValidatorContext constraintValidatorContext) {
         for (br.com.gs3.avaliacaotecnica.dao.entity.Telefone telefone : telefones) {
-            String numeroSemMascara = telefone.getNumero().toString().trim().replace("-", "").replace("(", "".replace(")", ""));
-            if(numeroSemMascara.length() > telefone.getTipoTelefone().getQtdCaracteres()){
-                return false;
+            if(null != telefone.getNumero() && !telefone.getNumero().isEmpty()){
+                String numeroSemMascara = telefone.getNumero().trim().replace("-", "").replace("(", "".replace(")", ""));
+                if(numeroSemMascara.length() > telefone.getTipoTelefone().getQtdCaracteres()){
+                    return false;
+                }
             }
+
         }
         return true;
     }
