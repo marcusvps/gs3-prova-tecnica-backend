@@ -1,0 +1,267 @@
+{
+	"info": {
+		"_postman_id": "3acf021c-5ca6-499b-9e58-0291429b4698",
+		"name": "GS3 - PROVA TÉCNICA - API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Cliente",
+			"item": [
+				{
+					"name": "Recuperar Cliente pelo CPF",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/cliente/039565871322",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"cliente",
+								"039565871322"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar novo cliente",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"MARC\",\r\n    \"cpf\": \"0395658713223\",\r\n    \"endereco\": {\r\n        \"bairro\": \"sul 2\",\r\n        \"cep\": \"\",\r\n        \"logradouro\":\" logradouro sul\",\r\n        \"cidade\": \"taguatinga\",\r\n        \"uf\": \"df\",\r\n        \"complemento\": \"comp\"\r\n    },\r\n    \"emails\": [{\r\n        \"email\": \"marcusv001@gmail.com\"\r\n    }],\r\n    \"telefones\": [{\r\n        \"numero\": \"61993713732\",\r\n        \"tipoTelefone\": \"CELULAR\"\r\n    },\r\n    {\r\n        \"numero\": \"\",\r\n        \"tipoTelefone\": \"RESIDENCIAL\"\r\n    }]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/cliente/salvar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"cliente",
+								"salvar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Alterar um cliente",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"3\",\r\n    \"nome\": \"Marcus Santos 2\",\r\n    \"cpf\": \"03956587138\",\r\n    \"endereco\": {\r\n        \"id\": \"1\",\r\n        \"bairro\": \"sul 1444\",\r\n        \"cep\": \"72015924\",\r\n        \"logradouro\":\" logradouro NORTE\",\r\n        \"cidade\": \"taguatinga\",\r\n        \"uf\": \"df\"\r\n    },\r\n    \"emails\": [{\r\n        \"id\": \"3\",\r\n        \"cliente\":{\r\n            \"id\": \"2\"\r\n        },\r\n        \"email\": \"marcusv0033@gmail.com\"\r\n    }],\r\n    \"telefones\": [{\r\n        \"id\": \"4\",\r\n        \"cliente\":{\r\n            \"id\": \"2\"\r\n        },\r\n        \"numero\": \"61993713732\",\r\n        \"tipoTelefone\": \"CELULAR\"\r\n    },\r\n    {\r\n        \"id\": \"5\",\r\n        \"cliente\":{\r\n            \"id\": \"2\"\r\n        },\r\n        \"numero\": \"6130525342\",\r\n        \"tipoTelefone\": \"RESIDENCIAL\"\r\n    }]\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/cliente/alterar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"cliente",
+								"alterar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remover Cliente",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/cliente/remover/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"cliente",
+								"remover",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Recuperar Todos os Clientes",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/cliente",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"cliente"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Endereço - API CEP",
+			"item": [
+				{
+					"name": "Buscar CEP",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/endereco/72015924",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"endereco",
+								"72015924"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Usuario - Autenticação",
+			"item": [
+				{
+					"name": "Autenticar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/autenticar?login=comum&senha=1234562",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"autenticar"
+							],
+							"query": [
+								{
+									"key": "login",
+									"value": "comum"
+								},
+								{
+									"key": "senha",
+									"value": "1234562"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Historico",
+			"item": [
+				{
+					"name": "Historico por Usuario",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/historico/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"historico",
+								"1"
+							],
+							"query": [
+								{
+									"key": "idUsuario",
+									"value": "1 ",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
