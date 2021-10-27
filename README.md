@@ -14,9 +14,15 @@ https://github.com/marcusvps/gs3-prova-tecnica-backend/blob/main/GS3%20-%20PROVA
 
 
 ----
-A aplicação utiliza o H2Database, sendo um banco de dados em memória, cujo link para acesso a console é:
+A aplicação utiliza o H2Database, sendo um banco de dados em memória, cujo link para acesso a console é
+
 http://localhost:8080/h2-console
+
 driver class: org.h2.Driver
+
 jbcb url: jdbc:h2:mem:gs3ProvaTecnica
+
 user: admin
+
 pass: 123456
+
